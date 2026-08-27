@@ -1,86 +1,547 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>🖥 Chad's Personnal Site</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chad Williamson — Cybersecurity Builder</title>
+<meta name="description" content="Chad Williamson — cybersecurity builder shipping CertWatch and learning bug bounty hunting. Formerly a decade in B2B sales and account management.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0f1218;
+    --bg-alt:#0c0e13;
+    --surface:#161b24;
+    --surface-2:#1c2230;
+    --border:#262d3a;
+    --border-soft:#1d2330;
+    --text:#e8eaed;
+    --text-dim:#8b93a7;
+    --text-faint:#5b6274;
+    --valid:#4ade80;
+    --warn:#f5b544;
+    --danger:#f0654a;
+    --accent:#f5b544;
+    --accent-dim:#8a6a2c;
+    --mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    --sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --maxw: 1040px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  body{
+    margin:0;
+    background:
+      radial-gradient(1200px 600px at 15% -10%, rgba(245,181,68,0.06), transparent 60%),
+      radial-gradient(900px 500px at 100% 0%, rgba(74,222,128,0.04), transparent 55%),
+      var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit;}
+
+  ::selection{background:var(--accent); color:#141414;}
+
+  :focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+    border-radius:3px;
+  }
+
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+
+  /* ---------- NAV ---------- */
+  header.site-nav{
+    position:sticky; top:0; z-index:40;
+    background:rgba(15,18,24,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border-soft);
+  }
+  .nav-inner{
+    max-width:var(--maxw); margin:0 auto; padding:14px 28px;
+    display:flex; align-items:center; justify-content:space-between;
+    font-family:var(--mono); font-size:13px;
+  }
+  .nav-brand{color:var(--text); text-decoration:none; letter-spacing:0.02em;}
+  .nav-brand .dot{color:var(--valid);}
+  .nav-links{display:flex; gap:22px; list-style:none; margin:0; padding:0;}
+  .nav-links a{text-decoration:none; color:var(--text-dim); transition:color .15s ease;}
+  .nav-links a:hover{color:var(--accent);}
+  @media (max-width:640px){
+    .nav-links{display:none;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    max-width:var(--maxw); margin:0 auto;
+    padding:76px 28px 56px;
+  }
+  .eyebrow{
+    font-family:var(--mono); font-size:13px; color:var(--valid);
+    display:flex; align-items:center; gap:8px; margin-bottom:22px;
+  }
+  .eyebrow::before{content:'●'; font-size:8px; color:var(--valid); animation:pulse 2.4s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:1;} 50%{opacity:.35;}}
+
+  .hero h1{
+    font-family:var(--sans); font-weight:700;
+    font-size:clamp(2.4rem, 6vw, 3.6rem);
+    line-height:1.05; margin:0 0 14px; letter-spacing:-0.02em;
+  }
+  .hero .role{
+    font-family:var(--mono); font-size:clamp(15px,2.2vw,18px);
+    color:var(--accent); margin:0 0 20px; font-weight:500;
+  }
+  .hero p.lede{
+    max-width:560px; color:var(--text-dim); font-size:17px; margin:0 0 32px;
+  }
+  .hero-cta{display:flex; gap:12px; flex-wrap:wrap; margin-bottom:52px;}
+  .btn{
+    font-family:var(--mono); font-size:13.5px; text-decoration:none;
+    padding:11px 18px; border-radius:6px; border:1px solid var(--border);
+    display:inline-flex; align-items:center; gap:8px;
+    transition:border-color .15s ease, transform .15s ease, background .15s ease;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{background:var(--accent); color:#191307; border-color:var(--accent); font-weight:600;}
+  .btn-primary:hover{background:#ffc563;}
+  .btn-ghost{color:var(--text); background:var(--surface);}
+  .btn-ghost:hover{border-color:var(--accent-dim); color:var(--accent);}
+
+  /* ---------- TERMINAL SIGNATURE PANEL ---------- */
+  .term{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 30px 60px -30px rgba(0,0,0,0.6);
+    max-width:620px;
+  }
+  .term-bar{
+    display:flex; align-items:center; gap:8px;
+    padding:11px 14px; background:var(--surface-2);
+    border-bottom:1px solid var(--border);
+  }
+  .term-dot{width:10px; height:10px; border-radius:50%;}
+  .term-dot.r{background:#f0654a;} .term-dot.y{background:#f5b544;} .term-dot.g{background:#4ade80;}
+  .term-title{
+    margin-left:8px; font-family:var(--mono); font-size:12px; color:var(--text-faint);
+  }
+  .term-body{padding:20px 22px 24px; font-family:var(--mono); font-size:13.5px;}
+  .term-body .prompt{color:var(--text-faint);}
+  .term-body .cmd{color:var(--text);}
+  .term-line{display:flex; justify-content:space-between; gap:16px; padding:5px 0; border-bottom:1px dashed var(--border-soft);}
+  .term-line:last-of-type{border-bottom:none;}
+  .term-key{color:var(--text-dim);}
+  .term-val{color:var(--text); text-align:right;}
+  .status-ok{color:var(--valid);}
+  .status-warn{color:var(--warn);}
+  .term-footer{
+    margin-top:14px; padding-top:14px; border-top:1px solid var(--border-soft);
+    display:flex; justify-content:space-between; align-items:center;
+    font-size:12.5px;
+  }
+  .badge-active{
+    color:var(--valid); border:1px solid rgba(74,222,128,0.35);
+    background:rgba(74,222,128,0.08); padding:3px 9px; border-radius:20px;
+    font-size:11.5px; letter-spacing:0.03em;
+  }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{
+    max-width:var(--maxw); margin:0 auto;
+    padding:64px 28px;
+    border-top:1px solid var(--border-soft);
+  }
+  .sec-eyebrow{
+    font-family:var(--mono); font-size:12.5px; color:var(--text-faint);
+    margin:0 0 10px; letter-spacing:0.02em;
+  }
+  .sec-eyebrow .p{color:var(--valid);}
+  h2.sec-title{
+    font-size:clamp(1.5rem,3vw,2rem); margin:0 0 26px; font-weight:700; letter-spacing:-0.01em;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about-text{max-width:660px; color:var(--text-dim); font-size:16px;}
+  .about-text p{margin:0 0 16px;}
+  .about-text strong{color:var(--text); font-weight:600;}
+
+  /* ---------- FLAGSHIP: CERTWATCH ---------- */
+  .flagship{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:32px;
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:32px;
+  }
+  @media (max-width:760px){ .flagship{grid-template-columns:1fr;} }
+
+  .flagship h3{font-size:1.4rem; margin:0 0 6px;}
+  .flagship .tagline{color:var(--accent); font-family:var(--mono); font-size:13px; margin:0 0 16px;}
+  .flagship p.desc{color:var(--text-dim); margin:0 0 20px; font-size:15px;}
+  .check-list{list-style:none; margin:0 0 22px; padding:0; display:grid; gap:9px;}
+  .check-list li{
+    font-family:var(--mono); font-size:13.5px; color:var(--text-dim);
+    display:flex; gap:10px; align-items:flex-start;
+  }
+  .check-list li::before{content:'✓'; color:var(--valid); font-weight:700;}
+  .tag-row{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:24px;}
+  .tag{
+    font-family:var(--mono); font-size:11.5px; color:var(--text-dim);
+    border:1px solid var(--border); padding:4px 10px; border-radius:20px;
+  }
+  .flagship-links{display:flex; gap:12px; flex-wrap:wrap;}
+
+  .flagship-side{
+    background:var(--bg-alt); border:1px solid var(--border-soft);
+    border-radius:10px; padding:20px; font-family:var(--mono); font-size:12.5px;
+    align-self:start;
+  }
+  .flagship-side .fs-label{color:var(--text-faint); margin-bottom:12px; font-size:11px; letter-spacing:0.05em; text-transform:uppercase;}
+  .fs-row{display:flex; justify-content:space-between; padding:7px 0; border-bottom:1px dashed var(--border-soft); gap:10px;}
+  .fs-row:last-child{border-bottom:none;}
+  .fs-row span:first-child{color:var(--text-dim);}
+  .fs-row span:last-child{color:var(--text); text-align:right;}
+
+  /* ---------- PROJECTS GRID ---------- */
+  .proj-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  @media (max-width:820px){.proj-grid{grid-template-columns:1fr;}}
+  .proj-card{
+    background:var(--surface); border:1px solid var(--border); border-radius:10px;
+    padding:22px; transition:border-color .15s ease, transform .15s ease;
+  }
+  .proj-card:hover{border-color:var(--accent-dim); transform:translateY(-2px);}
+  .proj-card h4{margin:0 0 10px; font-size:16px;}
+  .proj-card p{color:var(--text-dim); font-size:14px; margin:0 0 16px;}
+  .proj-tags{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px;}
+  .proj-tags .tag{font-size:10.5px;}
+  .proj-link{
+    font-family:var(--mono); font-size:12.5px; text-decoration:none;
+    color:var(--accent); display:inline-flex; align-items:center; gap:6px;
+  }
+  .proj-link:hover{text-decoration:underline;}
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:28px 40px;}
+  @media (max-width:700px){.skills-grid{grid-template-columns:1fr;}}
+  .skill-group h4{
+    font-family:var(--mono); font-size:12.5px; color:var(--warn);
+    text-transform:uppercase; letter-spacing:0.06em; margin:0 0 14px;
+  }
+  .skill-pills{display:flex; flex-wrap:wrap; gap:8px;}
+  .skill-pills .tag{color:var(--text-dim);}
+
+  /* ---------- EXPERIENCE TIMELINE ---------- */
+  .timeline{border-left:1px solid var(--border); padding-left:26px; display:grid; gap:30px;}
+  .tl-item{position:relative;}
+  .tl-item::before{
+    content:''; position:absolute; left:-31px; top:4px;
+    width:9px; height:9px; border-radius:50%;
+    background:var(--bg); border:2px solid var(--accent-dim);
+  }
+  .tl-item.current::before{border-color:var(--valid);}
+  .tl-date{font-family:var(--mono); font-size:12px; color:var(--text-faint); margin-bottom:6px;}
+  .tl-item h4{margin:0 0 3px; font-size:16px;}
+  .tl-item .tl-org{color:var(--text-dim); font-size:14px; margin:0 0 10px;}
+  .tl-item ul{margin:0; padding-left:18px; color:var(--text-dim); font-size:14px;}
+  .tl-item li{margin-bottom:4px;}
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  footer{
+    max-width:var(--maxw); margin:0 auto; padding:60px 28px 80px;
+    border-top:1px solid var(--border-soft);
+  }
+  footer h2{margin:0 0 12px;}
+  footer p.sub{color:var(--text-dim); max-width:480px; margin:0 0 30px;}
+  .contact-grid{display:flex; flex-wrap:wrap; gap:14px;}
+  .contact-card{
+    display:flex; align-items:center; gap:12px;
+    background:var(--surface); border:1px solid var(--border); border-radius:8px;
+    padding:14px 18px; text-decoration:none; color:var(--text);
+    font-family:var(--mono); font-size:13.5px;
+    transition:border-color .15s ease, transform .15s ease;
+    flex:1 1 220px;
+  }
+  .contact-card:hover{border-color:var(--accent-dim); transform:translateY(-2px); color:var(--accent);}
+  .contact-card .ico{color:var(--accent); font-size:15px;}
+  .foot-note{margin-top:52px; color:var(--text-faint); font-size:12.5px; font-family:var(--mono);}
+</style>
 </head>
-
 <body>
-  <table cellspacing="10px">
-    <tr>
-      <td><img src="3F4B9221-F140-46A9-9F4B-B11751415617_4_5005_c.jpeg" alt="Chad's Profile Pic"></td>
-      <td>
-        <h1><em><strong>Chad Williamson</strong></em></h1>
-        <p><em>Student of <a href="https://www.udemy.com/course/the-complete-web-development-bootcamp/"><strong>Udemy Full-Stack Web Developer Course</strong></a> , <br><em>and</em> <a
-              href="https://techbootcamps.utexas.edu/cybersecurity/landing/?s=Google-Brand_RFull&pkw=ut%20austin%20cyber%20security%20certificate&pcrid=511349909461&pmt=e&utm_source=google&utm_medium=cpc&utm_campaign=GGL%7CUT-AUSTIN%7CSEM%7CCYBER%7C-%7COFL%7C_RFull_%7CALL%7CBRD%7CEXACT%7CCore%7CCertificate&utm_term=ut%20austin%20cyber%20security%20certificate&s=google&k=ut%20austin%20cyber%20security%20certificate&utm_adgroupid=106111120261&utm_locationphysicalms=9028269&utm_matchtype=e&utm_network=g&utm_device=c&utm_content=511349909461&utm_placement=&gclid=Cj0KCQjw39uYBhCLARIsAD_SzMSMDsgoocFELButd5DKAHYPjux0f9xMf_RVo7TQzJda8D3kxPglNGMaAtkIEALw_wcB&gclsrc=aw.ds"><strong>UT
-                at Austin 24 week Cybersecurity Bootcamp.</strong></em></a></p>
-        <p><em>Iam intrigued by puzzels and tech. I love to travel ✈ <br> and never miss an <a href="https://www.austinfc.com/"><strong>Austin FC ⚽</strong></a> game.</em></p>
-      </td>
-    </tr>
-  </table>
 
-  <hr>
-  <h3><em>Books or Resources</em></h3>
-  <ul>
-    <li><em>Purple Team Field Manuel </em></li>
-    <li><em>Udemy </em></li>
-    <li><em>LinkedIn Learning </em></li>
-  </ul>
-  <hr>
-  <h3><em>Skills</em></h3>
-  <table>
-    <tr>
-      <td>
-        <li><em>Wire Shark </em></li>
-        <li><em>Splunk </em></li>
-        <li><em>Azure </em></li>
-      </td>
-      <td>
-        <li><em>John The Ripper </em></li>
-        <li><em>Oracle VM </em></li>
-        <li><em>Linux </em></li>
-      </td>
-      <td>
-        <li><em>MAC OS </em></li>
-        <li><em>Windows </em></li>
-        <li><em>NMAP </em></li>
-      </td>
-      <td>
-        <li><em>Excel </em></li>
-        <li><em>Google G-Suit </em></li>
-        <li><em>HubSpot </em></li>
-      </td>
-      <td>
-        <li><em>Distribution Channel Sales Manager </em></li>
-        <li><em>International Channel Sales Manager </em></li>
-        <li><em>Sales Operations </em></li>
-      </td>
+<header class="site-nav">
+  <div class="nav-inner">
+    <a href="#top" class="nav-brand">chad<span class="dot">@</span>williamson</a>
+    <ul class="nav-links">
+      <li><a href="#certwatch">CertWatch</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</header>
 
-    </tr>
+<main id="top">
 
-  </table>
+  <!-- HERO -->
+  <section class="hero" style="border-top:none; padding-top:76px;">
+    <div class="eyebrow">STATUS: ACTIVELY BUILDING</div>
+    <h1>Chad Williamson</h1>
+    <p class="role">Cybersecurity Builder — Costa Rica</p>
+    <p class="lede">
+      I build security software full-time. Right now that means building <strong style="color:var(--text)">CertWatch</strong>,
+      a live SSL &amp; domain monitoring SaaS, doing freelance security audits during the day, and building bug bounty
+      skills from the ground up on real HackerOne programs.
+    </p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#certwatch">View CertWatch →</a>
+      <a class="btn btn-ghost" href="https://github.com/ChadSWilliamson">GitHub</a>
+      <a class="btn btn-ghost" href="#contact">Get in touch</a>
+    </div>
 
+    <div class="term" role="img" aria-label="Mock CertWatch scan output describing Chad Williamson's current focus and status">
+      <div class="term-bar">
+        <span class="term-dot r"></span><span class="term-dot y"></span><span class="term-dot g"></span>
+        <span class="term-title">certwatch — scan result</span>
+      </div>
+      <div class="term-body">
+        <div style="margin-bottom:14px;"><span class="prompt">$</span> <span class="cmd">certwatch scan chadwilliamson.dev</span></div>
+        <div class="term-line"><span class="term-key">IDENTITY</span><span class="term-val status-ok">✓ valid</span></div>
+        <div class="term-line"><span class="term-key">CURRENT FOCUS</span><span class="term-val">CertWatch (SSL &amp; domain monitoring)</span></div>
+        <div class="term-line"><span class="term-key">DAY WORK</span><span class="term-val">Freelance security audits</span></div>
+        <div class="term-line"><span class="term-key">IN PROGRESS</span><span class="term-val status-warn">⚠ bug bounty hunting</span></div>
+        <div class="term-line"><span class="term-key">BACKGROUND</span><span class="term-val">10 yrs B2B sales &amp; accounts</span></div>
+        <div class="term-line"><span class="term-key">LOCATION</span><span class="term-val">Costa Rica</span></div>
+        <div class="term-footer">
+          <span style="color:var(--text-faint)">scanned just now</span>
+          <span class="badge-active">● shipping</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- ABOUT -->
+  <section id="about">
+    <p class="sec-eyebrow"><span class="p">$</span> whoami</p>
+    <h2 class="sec-title">From closing deals to closing CVEs</h2>
+    <div class="about-text">
+      <p>I spent a decade in B2B sales and account management, managing <strong>600+ accounts</strong> at Windship Trading, serving as General Manager at Aaron's Sales &amp; Lease, and working in global distribution at Grav Labs. Good sales is reconnaissance: understand the target, identify the opening, and close the loop. It turns out those instincts translate remarkably well to cybersecurity.</p>
+      <p>In 2021, I completed the University of Texas at Austin's cybersecurity bootcamp and started building — participating in red-team/blue-team engagements and deploying a full ELK stack on Azure. Since then, I've developed a working SSL and domain monitoring platform from scratch.</p>
+      <p>In 2025, I left the traditional workforce to build full-time. Today, <strong>CertWatch</strong> is my flagship product, I also conduct freelance security audits for clients, and I'm developing deeper expertise in bug bounty hunting — applying the same reconnaissance mindset to real-world attack surfaces.</p>
+      <p>I'm drawn to difficult problems, the hunt for what others overlook, and the satisfaction of turning something broken into something that works. I believe the best path forward is to stay curious, keep building, and never stop learning.</p>
+    </div>
+  </section>
 
-  <hr>
-  <a href="Work Experience.html">
-    <h3><em>Work Experience</em></h3>
-  </a>
-  <hr>
-  <a href="Contact Me.html">
-    <h3><em>Contact Me</em></h3>
-  </a>
-  <hr>
-  <h3><em>Hobbies</em></h3>
-  <ul>
-    <li><em>Running</em></li>
-    <li><em>Travel</em></li>
-    <li><em>Golf</em></li>
-    <li><em>Snowboarding</em></li>
-    <li><em>PickleBall</em></li>
-    <li><em>Learning</em></li>
-  </ul>
+  <!-- CERTWATCH FLAGSHIP -->
+  <section id="certwatch">
+    <p class="sec-eyebrow"><span class="p">$</span> cat flagship-project.md</p>
+    <h2 class="sec-title">CertWatch</h2>
+    <div class="flagship">
+      <div>
+        <h3>SSL &amp; Domain Expiry Monitor</h3>
+        <p class="tagline">Multi-tenant SaaS · live in production</p>
+        <p class="desc">
+          A monitoring platform built solo so businesses stop finding out their certificate or domain expired from
+          an angry customer. It checks real customer domains daily, deduplicates alerts, and emails you before
+          anything breaks.
+        </p>
+        <ul class="check-list">
+          <li>SSL certificate expiry monitoring</li>
+          <li>Domain expiry via RDAP, with WHOIS fallback</li>
+          <li>Certificate Transparency log monitoring (crt.sh)</li>
+          <li>DNS record change detection</li>
+          <li>Uptime monitoring, checked every 15 minutes</li>
+          <li>Email alerts via Resend, with alert deduplication</li>
+        </ul>
+        <div class="tag-row">
+          <span class="tag">Node.js</span>
+          <span class="tag">Supabase / Postgres</span>
+          <span class="tag">Row-Level Security</span>
+          <span class="tag">GitHub Actions</span>
+          <span class="tag">RDAP / WHOIS</span>
+          <span class="tag">crt.sh</span>
+          <span class="tag">Resend</span>
+        </div>
+        <div class="flagship-links">
+          <a class="btn btn-primary" href="https://chadswilliamson.github.io/CertWatch/">Live product →</a>
+          <a class="btn btn-ghost" href="https://github.com/ChadSWilliamson/CertWatch">Source on GitHub</a>
+        </div>
+      </div>
+      <div class="flagship-side">
+        <div class="fs-label">Plan tiers</div>
+        <div class="fs-row"><span>Free</span><span>1 domain</span></div>
+        <div class="fs-row"><span>Starter</span><span>5 domains</span></div>
+        <div class="fs-row"><span>Pro</span><span>25 domains</span></div>
+        <div class="fs-row"><span>Agency</span><span>100 domains</span></div>
+        <div class="fs-label" style="margin-top:20px;">How it runs</div>
+        <div class="fs-row"><span>Cert &amp; domain checks</span><span>Daily</span></div>
+        <div class="fs-row"><span>Uptime checks</span><span>Every 15 min</span></div>
+        <div class="fs-row"><span>Automation</span><span>GitHub Actions</span></div>
+        <div class="fs-row"><span>Data layer</span><span>Supabase + RLS</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OTHER PROJECTS -->
+  <section id="projects">
+    <p class="sec-eyebrow"><span class="p">$</span> ls ~/projects</p>
+    <h2 class="sec-title">Other projects</h2>
+    <div class="proj-grid">
+      <div class="proj-card">
+        <h4>ELK Stack Deployment</h4>
+        <p>Configured a load-balanced, monitored network on Azure — jump box, web servers, and a full ELK stack deployed with Ansible, shipping logs and metrics via Filebeat and Metricbeat.</p>
+        <div class="proj-tags">
+          <span class="tag">Azure</span><span class="tag">Ansible</span><span class="tag">ELK</span><span class="tag">Docker</span>
+        </div>
+        <a class="proj-link" href="https://github.com/ChadSWilliamson/Elk-Stack-Project">View repo →</a>
+      </div>
+      <div class="proj-card">
+        <h4>Red vs. Blue</h4>
+        <p>Played both sides of a live engagement — attacked a target network as a penetration tester, then defended and investigated it as a SOC analyst.</p>
+        <div class="proj-tags">
+          <span class="tag">Pentesting</span><span class="tag">SOC</span><span class="tag">Incident Response</span>
+        </div>
+        <a class="proj-link" href="https://github.com/ChadSWilliamson/Red-vs.-Blue-Project">View repo →</a>
+      </div>
+      <div class="proj-card">
+        <h4>Vulnerable Network: Attack &amp; Defense</h4>
+        <p>End-to-end assessment of a deliberately vulnerable network — attack, defense, and full write-up of the analysis.</p>
+        <div class="proj-tags">
+          <span class="tag">Network Security</span><span class="tag">Vulnerability Analysis</span>
+        </div>
+        <a class="proj-link" href="https://github.com/ChadSWilliamson/Final_Project">View repo →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <p class="sec-eyebrow"><span class="p">$</span> cat skills.json</p>
+    <h2 class="sec-title">Toolkit</h2>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h4>Security &amp; Monitoring</h4>
+        <div class="skill-pills">
+          <span class="tag">SIEM</span><span class="tag">Wireshark</span><span class="tag">Splunk</span>
+          <span class="tag">Metasploit</span><span class="tag">NMAP</span><span class="tag">Firewalls &amp; VPNs</span>
+          <span class="tag">Threat Analysis</span><span class="tag">Incident Response</span>
+          <span class="tag">Vulnerability Management</span><span class="tag">Azure / AWS Cloud Security</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Security Auditing</h4>
+        <div class="skill-pills">
+          <span class="tag">Security Reviews</span><span class="tag">ESLint (security plugin)</span>
+          <span class="tag">npm audit</span><span class="tag">Findings &amp; Remediation</span>
+          <span class="tag">Client Engagement</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Bug Bounty Toolkit</h4>
+        <div class="skill-pills">
+          <span class="tag">Burp Suite</span><span class="tag">subfinder</span><span class="tag">amass</span>
+          <span class="tag">httpx</span><span class="tag">Reconnaissance</span><span class="tag">HackerOne programs</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Building &amp; Infrastructure</h4>
+        <div class="skill-pills">
+          <span class="tag">Node.js</span><span class="tag">Supabase / Postgres</span><span class="tag">SQL</span>
+          <span class="tag">GitHub Actions</span><span class="tag">Git</span><span class="tag">AI-assisted development</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Translating Tech to People</h4>
+        <div class="skill-pills">
+          <span class="tag">Client Relationship Management</span><span class="tag">Stakeholder Communication</span>
+          <span class="tag">Technical Presentations</span><span class="tag">Consultative Selling</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <p class="sec-eyebrow"><span class="p">$</span> git log --oneline</p>
+    <h2 class="sec-title">Experience</h2>
+    <div class="timeline">
+      <div class="tl-item current">
+        <div class="tl-date">04/2025 — Present</div>
+        <h4>Independent Builder</h4>
+        <p class="tl-org">Self-employed, Costa Rica</p>
+        <ul>
+          <li>Building and operating CertWatch full-time, from architecture to customer-facing product.</li>
+          <li>Running freelance security audits for clients — reviews, findings, and remediation guidance.</li>
+          <li>Developing bug bounty hunting skills on live HackerOne programs, backed by a full recon toolkit.</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">03/2023 — 04/2025</div>
+        <h4>Channel Manager, Global Distribution Accounts</h4>
+        <p class="tl-org">Grav Labs · Austin, TX</p>
+        <ul>
+          <li>Built client-focused solutions against customer needs, consistently exceeding sales targets.</li>
+          <li>Managed multiple concurrent projects across international distribution accounts.</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">05/2016 — 03/2023</div>
+        <h4>Senior Accounts Manager</h4>
+        <p class="tl-org">Windship Trading · San Marcos, TX</p>
+        <ul>
+          <li>Managed 600+ sales accounts, maintaining the highest profit margins for six consecutive years.</li>
+          <li>Led growth and knowledge-sharing across all international accounts for the team.</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">09/2011 — 09/2014</div>
+        <h4>General Manager</h4>
+        <p class="tl-org">Aaron's · San Antonio, TX</p>
+        <ul>
+          <li>Directed store operations, hitting 94.6% of a $16.5M annual revenue target.</li>
+          <li>Owned staffing, P&amp;Ls, inventory control, and hiring for the location.</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">09/2021 — 03/2022</div>
+        <h4>Cybersecurity Certification</h4>
+        <p class="tl-org">The University of Texas at Austin</p>
+        <ul>
+          <li>Six-month bootcamp covering network security, SOC operations, and penetration testing fundamentals.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <footer id="contact">
+    <p class="sec-eyebrow"><span class="p">$</span> whois chadwilliamson</p>
+    <h2 class="sec-title">Get in touch</h2>
+    <p class="sub">Open to freelance security review work, bug bounty collaboration, or just talking shop about SaaS and security tooling.</p>
+    <div class="contact-grid">
+      <a class="contact-card" href="mailto:chadwilliamson76@gmail.com"><span class="ico">✉</span> chadwilliamson76@gmail.com</a>
+      <a class="contact-card" href="https://github.com/ChadSWilliamson"><span class="ico">◆</span> github.com/ChadSWilliamson</a>
+      <a class="contact-card" href="https://www.linkedin.com/in/chad-williamson22/"><span class="ico">in</span> LinkedIn</a>
+      <a class="contact-card" href="https://twitter.com/ChadSWilliamson"><span class="ico">✕</span> @ChadSWilliamson</a>
+    </div>
+    <p class="foot-note">© 2026 Chad Williamson. Built &amp; deployed with GitHub Pages.</p>
+  </footer>
+
+</main>
+
 </body>
-
 </html>

@@ -126,6 +126,24 @@
     overflow:hidden;
     box-shadow:0 30px 60px -30px rgba(0,0,0,0.6);
     max-width:620px;
+    position:relative;
+  }
+  .term::after{
+    content:'';
+    position:absolute;
+    left:0; right:0; top:-2px;
+    height:2px;
+    background:linear-gradient(90deg, transparent, var(--accent), transparent);
+    box-shadow:0 0 14px 2px rgba(245,181,68,0.55);
+    pointer-events:none;
+    z-index:5;
+    animation:scan-sweep 1.5s ease-in-out 0.4s 1 both;
+  }
+  @keyframes scan-sweep{
+    0%{top:-2px; opacity:0;}
+    12%{opacity:1;}
+    88%{opacity:1;}
+    100%{top:100%; opacity:0;}
   }
   .term-bar{
     display:flex; align-items:center; gap:8px;
@@ -402,7 +420,7 @@
     <h2 class="sec-title">Other projects</h2>
     <div class="proj-grid">
       <div class="proj-card">
-        <h4>ELK Stack Deployment</h4>
+        <h4 class="decrypt-target">ELK Stack Deployment</h4>
         <p>Configured a load-balanced, monitored network on Azure — jump box, web servers, and a full ELK stack deployed with Ansible, shipping logs and metrics via Filebeat and Metricbeat.</p>
         <div class="proj-tags">
           <span class="tag">Azure</span><span class="tag">Ansible</span><span class="tag">ELK</span><span class="tag">Docker</span>
@@ -410,7 +428,7 @@
         <a class="proj-link" href="https://github.com/ChadSWilliamson/Elk-Stack-Project">View repo →</a>
       </div>
       <div class="proj-card">
-        <h4>Red vs. Blue</h4>
+        <h4 class="decrypt-target">Red vs. Blue</h4>
         <p>Played both sides of a live engagement — attacked a target network as a penetration tester, then defended and investigated it as a SOC analyst.</p>
         <div class="proj-tags">
           <span class="tag">Pentesting</span><span class="tag">SOC</span><span class="tag">Incident Response</span>
@@ -418,7 +436,7 @@
         <a class="proj-link" href="https://github.com/ChadSWilliamson/Red-vs.-Blue-Project">View repo →</a>
       </div>
       <div class="proj-card">
-        <h4>Vulnerable Network: Attack &amp; Defense</h4>
+        <h4 class="decrypt-target">Vulnerable Network: Attack &amp; Defense</h4>
         <p>End-to-end assessment of a deliberately vulnerable network — attack, defense, and full write-up of the analysis.</p>
         <div class="proj-tags">
           <span class="tag">Network Security</span><span class="tag">Vulnerability Analysis</span>
@@ -542,6 +560,49 @@
   </footer>
 
 </main>
+
+<script>
+(function(){
+  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) return;
+
+  var CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ!<>-_\\/[]{}=+*^?#';
+
+  function decrypt(el){
+    if (el._decrypting) return;
+    el._decrypting = true;
+    var original = el.dataset.original || el.textContent;
+    el.dataset.original = original;
+    var revealed = 0;
+    var totalSteps = original.length * 3;
+    var step = 0;
+
+    clearInterval(el._decryptInterval);
+    el._decryptInterval = setInterval(function(){
+      revealed = Math.floor(step / 3);
+      var out = '';
+      for (var i = 0; i < original.length; i++){
+        var ch = original[i];
+        if (ch === ' '){ out += ' '; continue; }
+        if (i < revealed){ out += ch; }
+        else { out += CHARS[Math.floor(Math.random() * CHARS.length)]; }
+      }
+      el.textContent = out;
+      step++;
+      if (step > totalSteps){
+        el.textContent = original;
+        clearInterval(el._decryptInterval);
+        el._decrypting = false;
+      }
+    }, 28);
+  }
+
+  document.querySelectorAll('.decrypt-target').forEach(function(el){
+    el.dataset.original = el.textContent;
+    el.addEventListener('mouseenter', function(){ decrypt(el); });
+  });
+})();
+</script>
 
 </body>
 </html>

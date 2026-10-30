@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chad Williamson — Cybersecurity Researcher</title>
-<meta name="description" content="Chad Williamson — cybersecurity researcher shipping CertWatch and learning bug bounty hunting. Formerly a decade in B2B sales and account management.">
+<title>Chad Williamson — Director of Sales, HCS Technical Services</title>
+<meta name="description" content="Chad Williamson — Director of Sales at HCS Technical Services, a managed IT and cybersecurity provider. Builder of CertWatch, bug bounty researcher, and a decade in B2B sales.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght,SOFT@9..144,600..900,100&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#0f1218;
@@ -296,6 +296,93 @@
   .contact-card:hover{border-color:var(--accent-dim); transform:translateY(-2px); color:var(--accent);}
   .contact-card .ico{color:var(--accent); font-size:15px;}
   .foot-note{margin-top:52px; color:var(--text-faint); font-size:12.5px; font-family:var(--mono);}
+
+  /* ================= 1970s THEME ================= */
+  :root{
+    --bg:#f1e3c6; --bg-alt:#e8d5b0; --surface:#faf1df; --surface-2:#ead8b3;
+    --border:#cdb084; --border-soft:#dcc59c;
+    --text:#3a2314; --text-dim:#6b4a32; --text-faint:#977658;
+    --valid:#6b7a1f; --warn:#c8561b; --danger:#a3361a;
+    --accent:#c8561b; --accent-dim:#d9a441;
+    --gold:#e0a526; --brown:#5a3420; --avocado:#6b7a1f; --rust:#a3361a;
+    --display:'Fraunces', Georgia, serif;
+  }
+  body{
+    background:
+      repeating-linear-gradient(90deg, rgba(90,52,32,0.025) 0 2px, transparent 2px 6px),
+      var(--bg);
+  }
+  ::selection{background:var(--gold); color:var(--brown);}
+  header.site-nav{background:rgba(58,35,20,0.96); border-bottom:none;}
+  header.site-nav::after{
+    content:''; display:block; height:12px;
+    background:linear-gradient(180deg,
+      var(--gold) 0 25%, var(--accent) 25% 50%, var(--rust) 50% 75%, var(--brown) 75% 100%);
+  }
+  .nav-brand{color:#f6e7c8; font-family:var(--display); font-weight:800; font-size:18px; letter-spacing:0;}
+  .nav-brand .dot{color:var(--gold);}
+  .nav-links a{color:#e3cfa6;}
+  .nav-links a:hover{color:var(--gold);}
+
+  .eyebrow{color:var(--avocado); font-weight:600; letter-spacing:0.08em;}
+  .eyebrow::before{color:var(--accent);}
+  .hero h1, h2.sec-title, .flagship h3, .proj-card h4, .tl-item h4{
+    font-family:var(--display); font-variation-settings:'SOFT' 100;
+  }
+  .hero h1{font-weight:900; font-size:clamp(2.8rem,7vw,4.6rem); letter-spacing:-0.01em; color:var(--brown);}
+  .hero .role{color:var(--rust); font-weight:600;}
+  h2.sec-title{font-weight:800; font-size:clamp(1.8rem,3.4vw,2.4rem); color:var(--brown);}
+  .sec-eyebrow{color:var(--text-faint);} .sec-eyebrow .p{color:var(--accent);}
+
+  .btn{border-radius:999px; border-width:2px;}
+  .btn-primary{background:var(--accent); border-color:var(--accent); color:#fff4e0;}
+  .btn-primary:hover{background:var(--rust); border-color:var(--rust);}
+  .btn-ghost{background:transparent; border-color:var(--brown); color:var(--brown);}
+  .btn-ghost:hover{background:var(--brown); color:#f6e7c8; border-color:var(--brown);}
+
+  /* the terminal becomes a wood-grain console TV */
+  .term{
+    background:#3a2314; border:none; border-radius:22px; padding:14px;
+    box-shadow:0 22px 40px -20px rgba(58,35,20,0.55), inset 0 0 0 3px #5a3420;
+    background-image:repeating-linear-gradient(100deg, rgba(255,255,255,0.03) 0 3px, transparent 3px 9px);
+  }
+  .term-bar{background:transparent; border:none; padding:2px 8px 12px;}
+  .term-title{color:#d9a441;}
+  .term-dot.r{background:var(--accent);} .term-dot.y{background:var(--gold);} .term-dot.g{background:#8a9a2e;}
+  .term-body{background:#2a190d; border-radius:14px; color:#f6e7c8;
+    box-shadow:inset 0 0 40px rgba(224,165,38,0.12);}
+  .term-body .cmd, .term-val{color:#f6e7c8;}
+  .term-key, .term-body .prompt{color:#c9a77a;}
+  .term-line{border-bottom-color:rgba(217,164,65,0.18);}
+  .status-ok{color:#b5c449;} .status-warn{color:#f0a04b;}
+  .term-footer{border-top-color:rgba(217,164,65,0.25);}
+  .badge-active{color:#b5c449; border-color:rgba(181,196,73,0.4); background:rgba(181,196,73,0.1);}
+  .term::after{background:linear-gradient(90deg,transparent,var(--gold),transparent); box-shadow:0 0 14px 2px rgba(224,165,38,0.5);}
+
+  section, footer{border-top:none; position:relative;}
+  section::before{
+    content:''; position:absolute; top:0; left:28px; width:120px; height:8px; border-radius:8px;
+    background:linear-gradient(90deg, var(--gold) 0 33%, var(--accent) 33% 66%, var(--brown) 66%);
+  }
+
+  section.hero::before{display:none;}
+  .flagship, .proj-card, .contact-card{border-radius:22px; border:2px solid var(--border); background:var(--surface);}
+  .flagship{box-shadow:8px 8px 0 var(--gold);}
+  .flagship .tagline{color:var(--rust); font-weight:600;}
+  .flagship-side{background:var(--bg-alt); border:none; border-radius:16px;}
+  .check-list li::before{color:var(--avocado);}
+  .tag{border:1.5px solid var(--border); color:var(--text-dim); background:rgba(255,248,232,0.6);}
+  .proj-card:nth-child(1){border-top:10px solid var(--gold);}
+  .proj-card:nth-child(2){border-top:10px solid var(--accent);}
+  .proj-card:nth-child(3){border-top:10px solid var(--avocado);}
+  .proj-card:hover{border-color:var(--accent); box-shadow:6px 6px 0 var(--brown);}
+  .proj-link{color:var(--rust); font-weight:600;}
+  .skill-group h4{color:var(--rust);}
+  .timeline{border-left:3px solid var(--gold);}
+  .tl-item::before{left:-33px; width:13px; height:13px; background:var(--bg); border:3px solid var(--accent);}
+  .tl-item.current::before{background:var(--avocado); border-color:var(--avocado);}
+  .contact-card:hover{border-color:var(--accent); color:var(--rust); box-shadow:5px 5px 0 var(--gold);}
+  .contact-card .ico{color:var(--accent);}
 </style>
 </head>
 <body>
@@ -317,13 +404,14 @@
 
   <!-- HERO -->
   <section class="hero" style="border-top:none; padding-top:76px;">
-    <div class="eyebrow">STATUS: ACTIVELY BUILDING</div>
+    <div class="eyebrow">STATUS: SELLING SECURITY · STILL BUILDING</div>
     <h1>Chad Williamson</h1>
-    <p class="role">Cybersecurity Researcher — Costa Rica</p>
+    <p class="role">Director of Sales, HCS Technical Services — San Marcos, TX</p>
     <p class="lede">
-      I build security software full-time. Right now that means building <strong style="color:var(--text)">CertWatch</strong>,
-      a live SSL &amp; domain monitoring SaaS, doing freelance security audits during the day, and building bug bounty
-      skills from the ground up on real HackerOne programs.
+      I help small and mid-sized businesses find their security gaps before attackers do, as Director of Sales at
+      <strong style="color:var(--text)">HCS Technical Services</strong>, a managed IT and cybersecurity provider.
+      On the side I build <strong style="color:var(--text)">CertWatch</strong>, an SSL &amp; domain monitoring tool,
+      and hunt bugs on real HackerOne programs.
     </p>
     <div class="hero-cta">
       <a class="btn btn-primary" href="#certwatch">View CertWatch →</a>
@@ -339,11 +427,11 @@
       <div class="term-body">
         <div style="margin-bottom:14px;"><span class="prompt">$</span> <span class="cmd">certwatch scan chadwilliamson.dev</span></div>
         <div class="term-line"><span class="term-key">IDENTITY</span><span class="term-val status-ok">✓ valid</span></div>
-        <div class="term-line"><span class="term-key">CURRENT FOCUS</span><span class="term-val">CertWatch (SSL &amp; domain monitoring)</span></div>
-        <div class="term-line"><span class="term-key">DAY WORK</span><span class="term-val">Freelance security audits</span></div>
+        <div class="term-line"><span class="term-key">ROLE</span><span class="term-val">Director of Sales @ HCS</span></div>
+        <div class="term-line"><span class="term-key">SIDE PROJECT</span><span class="term-val">CertWatch (SSL &amp; domain monitoring)</span></div>
         <div class="term-line"><span class="term-key">IN PROGRESS</span><span class="term-val status-warn">⚠ bug bounty hunting</span></div>
         <div class="term-line"><span class="term-key">BACKGROUND</span><span class="term-val">10 yrs B2B sales &amp; accounts</span></div>
-        <div class="term-line"><span class="term-key">LOCATION</span><span class="term-val">Costa Rica</span></div>
+        <div class="term-line"><span class="term-key">LOCATION</span><span class="term-val">San Marcos, TX</span></div>
         <div class="term-footer">
           <span style="color:var(--text-faint)">scanned just now</span>
           <span class="badge-active">● shipping</span>
@@ -355,11 +443,11 @@
   <!-- ABOUT -->
   <section id="about">
     <p class="sec-eyebrow"><span class="p">$</span> whoami</p>
-    <h2 class="sec-title">From closing deals to closing CVEs</h2>
+    <h2 class="sec-title">Closing deals, closing gaps</h2>
     <div class="about-text">
       <p>I spent a decade in B2B sales and account management, managing <strong>600+ accounts</strong> at Windship Trading, serving as General Manager at Aaron's Sales &amp; Lease, and working in global distribution at Grav Labs. Good sales is reconnaissance: understand the target, identify the opening, and close the loop. It turns out those instincts translate remarkably well to cybersecurity.</p>
-      <p>In 2021, I completed the University of Texas at Austin's cybersecurity bootcamp and started building — participating in red-team/blue-team engagements and deploying a full ELK stack on Azure. Since then, I've developed a working SSL and domain monitoring platform from scratch.</p>
-      <p>In 2025, I left the traditional workforce to build full-time. Today, <strong>CertWatch</strong> is my flagship product, I also conduct freelance security audits for clients, and I'm developing deeper expertise in bug bounty hunting — applying the same reconnaissance mindset to real-world attack surfaces.</p>
+      <p>From 2021 to 2022, I completed the University of Texas at Austin's cybersecurity bootcamp and started building — participating in red-team/blue-team engagements and deploying a full ELK stack on Azure. Since then, I've developed a working SSL and domain monitoring platform from scratch.</p>
+      <p>Today I bring both halves together as Director of Sales at <strong>HCS Technical Services</strong>, a managed IT and cybersecurity provider. I help business owners understand where they're exposed and what to fix first, in plain English. Outside of HCS, I keep my hands on the technical side: building <strong>CertWatch</strong> and hunting bugs on HackerOne, applying the same reconnaissance mindset to real-world attack surfaces.</p>
       <p>I'm drawn to difficult problems, the hunt for what others overlook, and the satisfaction of turning something broken into something that works. I believe the best path forward is to stay curious, keep building, and never stop learning.</p>
     </div>
   </section>
@@ -371,11 +459,10 @@
     <div class="flagship">
       <div>
         <h3>SSL &amp; Domain Expiry Monitor</h3>
-        <p class="tagline">Multi-tenant SaaS · live in production</p>
+        <p class="tagline">Working project · built solo from scratch</p>
         <p class="desc">
-          A monitoring platform built solo so businesses stop finding out their certificate or domain expired from
-          an angry customer. It checks real customer domains daily, deduplicates alerts, and emails you before
-          anything breaks.
+          A monitoring tool built solo so businesses stop finding out their certificate or domain expired from
+          an angry customer. It checks domains daily, deduplicates alerts, and emails you before anything breaks.
         </p>
         <ul class="check-list">
           <li>SSL certificate expiry monitoring</li>
@@ -396,17 +483,12 @@
           <span class="tag">Resend</span>
         </div>
         <div class="flagship-links">
-          <a class="btn btn-primary" href="https://chadswilliamson.github.io/CertWatch/">Live product →</a>
+          <a class="btn btn-primary" href="https://chadswilliamson.github.io/CertWatch/">See it live →</a>
           <a class="btn btn-ghost" href="https://github.com/ChadSWilliamson/CertWatch">Source on GitHub</a>
         </div>
       </div>
       <div class="flagship-side">
-        <div class="fs-label">Plan tiers</div>
-        <div class="fs-row"><span>Free</span><span>1 domain</span></div>
-        <div class="fs-row"><span>Starter</span><span>5 domains</span></div>
-        <div class="fs-row"><span>Pro</span><span>25 domains</span></div>
-        <div class="fs-row"><span>Agency</span><span>100 domains</span></div>
-        <div class="fs-label" style="margin-top:20px;">How it runs</div>
+        <div class="fs-label">How it runs</div>
         <div class="fs-row"><span>Cert &amp; domain checks</span><span>Daily</span></div>
         <div class="fs-row"><span>Uptime checks</span><span>Every 15 min</span></div>
         <div class="fs-row"><span>Automation</span><span>GitHub Actions</span></div>
@@ -462,11 +544,10 @@
         </div>
       </div>
       <div class="skill-group">
-        <h4>Security Auditing</h4>
+        <h4>Secure Development</h4>
         <div class="skill-pills">
-          <span class="tag">Security Reviews</span><span class="tag">ESLint (security plugin)</span>
-          <span class="tag">npm audit</span><span class="tag">Findings &amp; Remediation</span>
-          <span class="tag">Client Engagement</span>
+          <span class="tag">Code Security Reviews</span><span class="tag">ESLint (security plugin)</span>
+          <span class="tag">npm audit</span><span class="tag">git-secrets</span>
         </div>
       </div>
       <div class="skill-group">
@@ -488,6 +569,7 @@
         <div class="skill-pills">
           <span class="tag">Client Relationship Management</span><span class="tag">Stakeholder Communication</span>
           <span class="tag">Technical Presentations</span><span class="tag">Consultative Selling</span>
+          <span class="tag">HubSpot CRM</span><span class="tag">Lead Generation</span>
         </div>
       </div>
     </div>
@@ -499,12 +581,22 @@
     <h2 class="sec-title">Experience</h2>
     <div class="timeline">
       <div class="tl-item current">
-        <div class="tl-date">04/2025 — Present</div>
-        <h4>Independent Researcher</h4>
-        <p class="tl-org">Self-employed, Costa Rica</p>
+        <div class="tl-date">10/2026 — Present</div>
+        <h4>Director of Sales</h4>
+        <p class="tl-org">HCS Technical Services · San Marcos, TX</p>
         <ul>
-          <li>Building and operating CertWatch full-time, from architecture to customer-facing product.</li>
-          <li>Running freelance security audits for clients — reviews, findings, and remediation guidance.</li>
+          <li>Lead new-business sales for a managed IT and cybersecurity provider serving small and mid-sized businesses.</li>
+          <li>Built the sales operation from scratch in HubSpot: pipeline, records, dashboard, call scripts, and email templates.</li>
+          <li>Designed a lead-generation funnel that uses pre-call security scans to open conversations with prospects.</li>
+          <li>Publish a weekly brief on the top three security risks facing small businesses.</li>
+        </ul>
+      </div>
+      <div class="tl-item current">
+        <div class="tl-date">02/2022 — Present</div>
+        <h4>Independent Security Projects</h4>
+        <p class="tl-org">Self-employed</p>
+        <ul>
+          <li>Built CertWatch, a working SSL, domain, DNS, and subdomain takeover monitoring tool.</li>
           <li>Developing bug bounty hunting skills on live HackerOne programs, backed by a full recon toolkit.</li>
         </ul>
       </div>
@@ -518,11 +610,11 @@
         </ul>
       </div>
       <div class="tl-item">
-        <div class="tl-date">05/2016 — 03/2023</div>
+        <div class="tl-date">05/2015 — 03/2023</div>
         <h4>Senior Accounts Manager</h4>
         <p class="tl-org">Windship Trading · San Marcos, TX</p>
         <ul>
-          <li>Managed 600+ sales accounts, maintaining the highest profit margins for six consecutive years.</li>
+          <li>Managed 600+ domestic and international wholesale accounts, maintaining the highest profit margins for six consecutive years.</li>
           <li>Led growth and knowledge-sharing across all international accounts for the team.</li>
         </ul>
       </div>
@@ -550,7 +642,7 @@
   <footer id="contact">
     <p class="sec-eyebrow"><span class="p">$</span> whois chadwilliamson</p>
     <h2 class="sec-title">Get in touch</h2>
-    <p class="sub">Open to freelance security review work, bug bounty collaboration, or just talking shop about SaaS and security tooling.</p>
+    <p class="sub">Want to know how exposed your business is? Reach out about HCS. Also happy to talk bug bounty or security tooling.</p>
     <div class="contact-grid">
       <a class="contact-card" href="mailto:chadwilliamson76@gmail.com"><span class="ico">✉</span> chadwilliamson76@gmail.com</a>
       <a class="contact-card" href="https://github.com/ChadSWilliamson"><span class="ico">◆</span> github.com/ChadSWilliamson</a>

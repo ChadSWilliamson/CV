@@ -383,6 +383,44 @@
   .tl-item.current::before{background:var(--avocado); border-color:var(--avocado);}
   .contact-card:hover{border-color:var(--accent); color:var(--rust); box-shadow:5px 5px 0 var(--gold);}
   .contact-card .ico{color:var(--accent);}
+
+  /* ---- more orange + avocado ---- */
+  header.site-nav::after{
+    background:linear-gradient(180deg,
+      var(--gold) 0 20%, var(--accent) 20% 40%, var(--rust) 40% 60%, var(--avocado) 60% 80%, var(--brown) 80% 100%);
+    height:15px;
+  }
+  .hero{position:relative; overflow:hidden;}
+  .hero::after{
+    content:''; position:absolute; right:-140px; top:40px; width:520px; height:520px; border-radius:50%;
+    background:radial-gradient(circle,
+      transparent 0 30%, var(--avocado) 30% 40%, transparent 40% 44%,
+      var(--gold) 44% 54%, transparent 54% 58%, var(--accent) 58% 68%, transparent 68% 72%,
+      var(--rust) 72% 82%, transparent 82%);
+    opacity:.85; z-index:0; pointer-events:none;
+  }
+  .hero > *{position:relative; z-index:1;}
+  @media (max-width:900px){ .hero::after{right:-300px; opacity:.35;} }
+  .hero h1 .last{color:var(--accent);}
+  section::before{
+    background:linear-gradient(90deg, var(--gold) 0 25%, var(--accent) 25% 50%, var(--avocado) 50% 75%, var(--brown) 75%);
+    width:160px;
+  }
+  h2.sec-title{display:inline-block; border-bottom:6px solid var(--accent); padding-bottom:4px;}
+  section:nth-of-type(even) h2.sec-title{border-bottom-color:var(--avocado);}
+  .about-text strong{color:var(--accent);}
+  .flagship{box-shadow:8px 8px 0 var(--gold), 16px 16px 0 var(--avocado);}
+  .tag-row .tag:nth-child(odd), .skill-group:nth-child(odd) .tag{background:rgba(107,122,31,0.12); border-color:rgba(107,122,31,0.45); color:#4f5a15;}
+  .tag-row .tag:nth-child(even), .skill-group:nth-child(even) .tag{background:rgba(200,86,27,0.10); border-color:rgba(200,86,27,0.45); color:#9a3c10;}
+  .skill-group:nth-child(odd) h4{color:var(--avocado);}
+  .skill-group:nth-child(even) h4{color:var(--accent);}
+  .timeline{border-left:3px solid var(--accent);}
+  .tl-item:nth-child(even)::before{border-color:var(--avocado);}
+  .tl-date{color:var(--avocado); font-weight:600;}
+  .tl-item .tl-org{color:var(--rust);}
+  .contact-card{border-left:8px solid var(--accent);}
+  .contact-card:nth-child(even){border-left-color:var(--avocado);}
+  .btn-ghost:hover{background:var(--avocado); border-color:var(--avocado);}
 </style>
 </head>
 <body>
@@ -405,7 +443,7 @@
   <!-- HERO -->
   <section class="hero" style="border-top:none; padding-top:76px;">
     <div class="eyebrow">STATUS: SELLING SECURITY · STILL BUILDING</div>
-    <h1>Chad Williamson</h1>
+    <h1>Chad <span class="last">Williamson</span></h1>
     <p class="role">Director of Sales, HCS Technical Services — San Marcos, TX</p>
     <p class="lede">
       I help small and mid-sized businesses find their security gaps before attackers do, and before the

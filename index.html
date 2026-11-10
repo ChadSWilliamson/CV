@@ -499,21 +499,27 @@
     <div class="flagship">
       <div>
         <h3>Outside-In Attack Surface Monitor</h3>
-        <p class="tagline">Working project · built solo from scratch</p>
+        <p class="tagline">Live private beta · built solo from scratch</p>
         <p class="desc">
           Vigía (Spanish for "lookout") watches a business's domains the way an attacker would, from the outside.
           Every day it scores each domain 0–100, flags what an attacker would notice first, and emails the owner before
-          an expired certificate, a dangling DNS record, or a leaked config file turns into an incident.
+          an expired certificate, a dangling DNS record, or a leaked config file turns into an incident. Connected
+          Microsoft 365 and Google Workspace accounts get read-only sign-in checks, and an AI analyst turns every scan
+          into a plain-English "fix first" list.
         </p>
         <ul class="check-list">
           <li>Daily 0–100 security score and letter grade per domain</li>
           <li>Email security: SPF, DMARC, and DKIM posture</li>
           <li>Web exposure: security headers, TLS config, server fingerprinting</li>
-          <li>Vulnerability intel: open ports and CVEs, with CISA KEV and EPSS context</li>
+          <li>Vulnerability intel: open ports and CVEs, with CISA KEV and EPSS context, verified against NVD fixed-in versions</li>
           <li>Active checks for leaked .git, .env, and backups, gated behind DNS ownership verification</li>
           <li>SSL, domain expiry (RDAP/WHOIS), DNS changes, and CT log monitoring</li>
           <li>Subdomain takeover detection (dangling CNAME checks)</li>
           <li>Uptime every 15 minutes, with deduplicated email alerts via Resend</li>
+          <li>Read-only Microsoft 365 checks (MFA coverage, admins, external mail forwarding) via a certificate-signed Graph app</li>
+          <li>Read-only Google Workspace checks with keyless Workload Identity Federation (no service-account keys)</li>
+          <li>AI security analyst: hosting-aware summaries with schema-forced output, validation, and PII redaction</li>
+          <li>Scan history and trends, a free landing-page check, and invite-code beta plans</li>
         </ul>
         <div class="tag-row">
           <span class="tag">Node.js</span>
@@ -525,6 +531,10 @@
           <span class="tag">Resend</span>
           <span class="tag">Shodan InternetDB</span>
           <span class="tag">SSRF protection</span>
+          <span class="tag">Microsoft Graph</span>
+          <span class="tag">Google Admin SDK</span>
+          <span class="tag">Workload Identity Federation</span>
+          <span class="tag">Claude API</span>
         </div>
         <div class="flagship-links">
           <a class="btn btn-primary" href="https://vigiarecon.com/">See it live →</a>
@@ -537,7 +547,9 @@
         <div class="fs-row"><span>Uptime checks</span><span>Every 15 min</span></div>
         <div class="fs-row"><span>Automation</span><span>GitHub Actions</span></div>
         <div class="fs-row"><span>Data layer</span><span>Supabase + RLS</span></div>
-          <div class="fs-row"><span>Active scans</span><span>Verified owners only</span></div>
+        <div class="fs-row"><span>Active scans</span><span>Verified owners only</span></div>
+        <div class="fs-row"><span>Account checks</span><span>Read-only, admin-approved</span></div>
+        <div class="fs-row"><span>AI summaries</span><span>Claude, redacted input</span></div>
       </div>
     </div>
   </section>
